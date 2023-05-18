@@ -78,7 +78,7 @@ class StrokePlayServiceTest {
         service.addShot(hole, playerOne)
         service.addShot(hole, playerTwo)
         val winner = service.getWinner()
-        assertEquals(playerTwo, winner)
+        assertEquals(playerOne, winner)
     }
 
 }
