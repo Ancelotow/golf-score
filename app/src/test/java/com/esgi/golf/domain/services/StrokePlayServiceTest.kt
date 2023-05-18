@@ -52,4 +52,17 @@ class StrokePlayServiceTest {
         assertEquals(2, resultTwo)
     }
 
+    @Test
+    fun getWinner() {
+        val hole = Hole(1, "Trou 1", 2)
+        val playerOne = Player(1, "Jean", "DUPONT")
+        val playerTwo = Player(2, "Patrick", "DUPONT")
+        val service = StrokePlayService()
+        service.addShot(hole, playerOne)
+        service.addShot(hole, playerOne)
+        service.addShot(hole, playerTwo)
+        val winner = service.getWinner()
+        assertEquals(playerTwo, winner)
+    }
+
 }
