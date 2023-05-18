@@ -8,6 +8,6 @@ interface GameRepository {
 
     fun getAll(): List<Game>
 
-    fun get(id: Int): Game
+    fun get(id: Int): Game?
 
 }
