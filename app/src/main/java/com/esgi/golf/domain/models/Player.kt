@@ -1,8 +1,7 @@
 package com.esgi.golf.domain.models
 
 data class Player(
-    val order: Int,
+    val id: Int,
     val firstname: String,
-    val name: String,
-    var nbShot: Int = 0
+    val name: String
 )
