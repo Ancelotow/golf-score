@@ -4,9 +4,7 @@ import com.esgi.golf.domain.models.Game
 
 class GameLocalRepository : GameRepository {
 
-    private val games = mutableListOf(
-        Game(1, "Partie 1", listOf(), listOf(), listOf())
-    )
+    private val games = mutableListOf<Game>()
 
     override fun add(game: Game): Int {
         games.add(game);
@@ -18,7 +16,7 @@ class GameLocalRepository : GameRepository {
     }
 
     override fun getAll(): List<Game> {
-        TODO("Not yet implemented")
+        return games.toList()
     }
 
 }
