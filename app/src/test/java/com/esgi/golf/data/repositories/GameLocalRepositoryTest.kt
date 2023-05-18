@@ -5,12 +5,21 @@ import org.junit.Test
 
 class GameLocalRepositoryTest {
 
+    private val repository = GameLocalRepository()
+
     @Test
     fun addGame() {
-        val repository = GameLocalRepository()
-        val game = Game(1, "Partie 1", listOf(), listOf(), listOf())
+        val game = Game(2, "Partie 2", listOf(), listOf(), listOf())
         val result = repository.add(game)
         assertEquals(game.id, result)
+    }
+
+    @Test
+    fun getGame() {
+        val newGame = Game(2, "Partie 2", listOf(), listOf(), listOf())
+        val id = repository.add(newGame)
+        val game = repository.get(id)
+        assertEquals(newGame, game)
     }
 
 }
