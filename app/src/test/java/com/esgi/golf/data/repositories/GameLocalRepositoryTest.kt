@@ -29,4 +29,14 @@ class GameLocalRepositoryTest {
         assertNull(game)
     }
 
+    @Test
+    fun getAllGames() {
+        val gameOne = Game(1, "Partie 1", listOf(), listOf(), listOf())
+        val gameTwo = Game(2, "Partie 2", listOf(), listOf(), listOf())
+        repository.add(gameOne)
+        repository.add(gameTwo)
+        val games = repository.getAll()
+        assertEquals(2, games.count())
+    }
+
 }
