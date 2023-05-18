@@ -5,8 +5,6 @@ import com.esgi.golf.domain.models.Player
 
 class StrokePlayService : ScoreCalculatorService {
 
-
-
     override fun addShot(hole: Hole, player: Player): Int {
         return ++player.nbShot
     }

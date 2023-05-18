@@ -26,4 +26,16 @@ class StrokePlayServiceTest {
         assertEquals(2, result)
     }
 
+    @Test
+    fun addShotToMultiplePlayer(){
+        val hole = Hole(1, "Trou 1", 2)
+        val playerOne = Player(1, "Jean", "DUPONT")
+        val playerTwo = Player(2, "Patrick", "DUPONT")
+        val service = StrokePlayService()
+        val resultOne = service.addShot(hole, playerOne)
+        val resultTwo = service.addShot(hole, playerTwo)
+        assertEquals(1, resultOne)
+        assertEquals(1, resultTwo)
+    }
+
 }
