@@ -13,6 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.esgi.golf.ui.theme.GolfTheme
 
 class MainActivity : ComponentActivity() {
+
+    // Appeler l'interface Service
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
