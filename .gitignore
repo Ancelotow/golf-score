@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/res/layout/activity_home.xml
+/.idea/compiler.xml
+/.idea/gradle.xml
+/app/src/main/java/com/esgi/golf/application/home/HomeActivity.kt
+/.idea/kotlinc.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/.name

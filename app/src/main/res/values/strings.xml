@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Golf</string>
+    <string name="app_name">Golf Score</string>
+
+    <!-- HomeActivity -->
+    <string name="home_title">Home</string>
+    <string name="home_button_new">New</string>
+    <string name="home_button_load">Load</string>
 </resources>
