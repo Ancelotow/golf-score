@@ -6,6 +6,11 @@
     <string name="home_button_new">New</string>
     <string name="home_button_load">Load</string>
 
+    <!-- ScoreActivity -->
+    <string name="hole_text">Hole</string>
+    <string name="btn_finish_txt">Finish</string>
+    <string name="player_text">Players (%s)</string>
+
     <!-- GameListActivity -->
     <string name="game_list_title">Game List</string>
 
