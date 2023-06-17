@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:allowBackup="true"
         android:name=".GolfScoreApplication"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,18 +14,25 @@
         android:theme="@style/Theme.Golf"
         tools:targetApi="31">
         <activity
-            android:name=".application.home.HomeActivity"
+            android:name=".application.setup.GameSetupActivity"
             android:exported="false" />
         <activity
-            android:name=".application.score.ScoreActivity"
-            android:theme="@style/Theme.AppCompat"
-            android:exported="true" >
+            android:name=".application.game.GameListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".application.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".application.score.ScoreActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

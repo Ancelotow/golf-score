@@ -10,4 +10,15 @@
     <string name="hole_text">Hole</string>
     <string name="btn_finish_txt">Finish</string>
     <string name="player_text">Players (%s)</string>
+
+    <!-- GameListActivity -->
+    <string name="game_list_title">Game List</string>
+
+    <!-- GameSetupActivity -->
+    <string name="game_setup_title">Game Setup</string>
+    <string name="game_setup_add_player_button">+ Add Player</string>
+    <string name="game_setup_start_game_button">Start</string>
+    <string name="game_setup_add_holes_button">+ Add Holes</string>
+    <string name="game_setup_game_name">Game Name</string>
+
 </resources>
