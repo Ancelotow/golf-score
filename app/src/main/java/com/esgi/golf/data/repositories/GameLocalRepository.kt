@@ -23,4 +23,8 @@ class GameLocalRepository @Inject constructor(
         return dataSource.getAll().map { gameMapper.map(it) }
     }
 
+    override fun update(game: Game) {
+        dataSource.update(gameMapper.map(game))
+    }
+
 }

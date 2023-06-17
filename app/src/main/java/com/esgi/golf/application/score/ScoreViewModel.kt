@@ -31,13 +31,12 @@ class ScoreViewModel @Inject constructor(
 
     fun getGame() {
         viewModelScope.launch {
-            val type = calculatorService.getTypeGame()
-            _gameState.value = ScoreState.loading(type)
+            _gameState.value = ScoreState.loading()
             try {
                 val game = calculatorService.getGame()
-                _gameState.value = ScoreState.success(game, type)
+                _gameState.value = ScoreState.success(game)
             } catch (e: Exception) {
-                _gameState.value = ScoreState.error(e, type)
+                _gameState.value = ScoreState.error(e)
             }
         }
     }

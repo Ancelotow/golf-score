@@ -17,7 +17,9 @@ class StrokePlayService @Inject constructor(
         val game = getGame()
         val round = game.rounds.find { r -> hole.id == r.hole.id && player.id == r.player.id }
             ?: throw GameException("this round does not exist")
-        return ++round.nbShot
+        round.nbShot += 1
+        repository.update(game)
+        return round.nbShot
     }
 
     override fun getWinner(): Player {
@@ -38,11 +40,14 @@ class StrokePlayService @Inject constructor(
     }
 
     override fun removeShot(hole: Hole, player: Player): Int {
-        return 0
-    }
-
-    override fun getTypeGame(): String {
-        return "Stroke Play"
+        val game = getGame()
+        val round = game.rounds.find { r -> hole.id == r.hole.id && player.id == r.player.id }
+            ?: throw GameException("this round does not exist")
+        if(round.nbShot > 0) {
+            round.nbShot -= 1
+        }
+        repository.update(game)
+        return round.nbShot
     }
 
 }

@@ -12,6 +12,4 @@ interface ScoreCalculatorService {
     fun removeShot(hole: Hole, player: Player): Int
 
     fun getWinner(): Player
-
-    fun getTypeGame(): String
 }

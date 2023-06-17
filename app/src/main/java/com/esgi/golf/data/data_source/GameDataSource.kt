@@ -10,4 +10,5 @@ interface GameDataSource {
 
     fun get(id: Int): GameDto?
 
+    fun update(game: GameDto)
 }

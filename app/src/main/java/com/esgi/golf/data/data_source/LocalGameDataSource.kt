@@ -85,4 +85,9 @@ class LocalGameDataSource @Inject constructor(): GameDataSource {
         return games.toList()
     }
 
+    override fun update(game: GameDto) {
+        games.removeIf { e -> e.id == game.id }
+        games.add(game)
+    }
+
 }

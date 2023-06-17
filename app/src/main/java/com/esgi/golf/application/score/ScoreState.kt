@@ -5,16 +5,15 @@ import com.esgi.golf.domain.models.Game
 data class ScoreState(
     val status: ScoreStateStatus = ScoreStateStatus.Loading,
     val error: Throwable? = null,
-    val game: Game? = null,
-    val type: String
+    val game: Game? = null
 ) {
     companion object {
-        fun initial(type: String) = ScoreState(status = ScoreStateStatus.Initial, type = type)
+        fun initial() = ScoreState(status = ScoreStateStatus.Initial)
 
-        fun loading(type: String) = ScoreState(status = ScoreStateStatus.Loading, type = type)
+        fun loading() = ScoreState(status = ScoreStateStatus.Loading)
 
-        fun error(error: Throwable, type: String) = ScoreState(status = ScoreStateStatus.Error, type = type, error = error)
+        fun error(error: Throwable) = ScoreState(status = ScoreStateStatus.Error, error = error)
 
-        fun success(game: Game, type: String) = ScoreState(status = ScoreStateStatus.Success, type = type, game = game)
+        fun success(game: Game) = ScoreState(status = ScoreStateStatus.Success, game = game)
     }
 }
