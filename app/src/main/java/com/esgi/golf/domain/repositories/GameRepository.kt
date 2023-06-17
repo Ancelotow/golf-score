@@ -10,4 +10,5 @@ interface GameRepository {
 
     fun get(id: Int): Game?
 
+    fun update(game: Game)
 }
