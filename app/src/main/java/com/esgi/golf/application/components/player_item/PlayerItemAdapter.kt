@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.domain.models.Player
+import com.esgi.golf.domain.models.Round
 
-class PlayerItemAdapter (
-    private val players: MutableList<Player>,
+class PlayerItemAdapter(
+    private val players: MutableList<Round>,
+    private val addShot: (Round) -> Unit,
+    private val removeShot: (Round) -> Unit,
     private val activity: Activity?
 ) : RecyclerView.Adapter<PlayerItemViewHolder>() {
 
@@ -19,7 +22,7 @@ class PlayerItemAdapter (
     }
 
     override fun onBindViewHolder(holder: PlayerItemViewHolder, position: Int) {
-        holder.setItem(players[position])
+        holder.setItem(players[position], addShot, removeShot)
     }
 
     override fun getItemCount(): Int {

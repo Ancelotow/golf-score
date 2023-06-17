@@ -1,4 +1,12 @@
 package com.esgi.golf.application.score
 
-class ScoreViewModel {
+import androidx.lifecycle.ViewModel
+import com.esgi.golf.domain.services.ScoreCalculatorService
+
+class ScoreViewModel constructor(
+    private val calculatorService: ScoreCalculatorService,
+) : ViewModel() {
+
+
+
 }

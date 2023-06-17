@@ -22,6 +22,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <ImageButton
+            android:id="@+id/btn_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
@@ -39,11 +40,11 @@
             android:padding="8dp"/>
 
         <ImageButton
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:src="@drawable/ic_add"
-
             android:layout_gravity="center_vertical"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
