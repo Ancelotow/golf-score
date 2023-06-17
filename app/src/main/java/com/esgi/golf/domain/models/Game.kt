@@ -6,4 +6,6 @@ data class Game(
     val players: List<Player>,
     val holes: List<Hole>,
     val rounds: List<Round>,
+    val winner: Player,
+    val date: String
 )
