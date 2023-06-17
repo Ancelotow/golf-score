@@ -8,6 +8,6 @@ data class GameDto(
     val players: List<PlayerDto>,
     val holes: List<HoleDto>,
     val rounds: List<RoundDto>,
-    val winner: PlayerDto,
+    val winner: PlayerDto?,
     val date: LocalDate
 )

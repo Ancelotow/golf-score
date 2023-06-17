@@ -17,7 +17,7 @@
             android:name=".application.setup.GameSetupActivity"
             android:exported="false" />
         <activity
-            android:name=".application.game.GameListActivity"
+            android:name=".application.score.ScoreActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat">
             <intent-filter>
@@ -30,9 +30,8 @@
             android:name=".application.home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".application.score.ScoreActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:name=".application.game.GameListActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
