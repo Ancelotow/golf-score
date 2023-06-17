@@ -21,4 +21,10 @@
     <string name="game_setup_add_holes_button">+ Add Holes</string>
     <string name="game_setup_game_name">Game Name</string>
 
+    <!-- DialogsBoxAddPlayer -->
+    <string name="dialog_add_player_title">Add Player</string>
+
+    <!-- DialogsBoxAddHoles -->
+    <string name="dialog_add_holes_title">Add Holes</string>
+
 </resources>

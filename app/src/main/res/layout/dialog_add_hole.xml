@@ -10,22 +10,29 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dialog_add_player_title"
+        android:text="@string/dialog_add_holes_title"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/dialog_add_player_firstname_edit_text"
+        android:id="@+id/dialog_add_hole_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Prénom" />
+        android:hint="Nom de trou" />
 
     <EditText
-        android:id="@+id/dialog_add_player_lastname_edit_text"
+        android:id="@+id/dialog_add_hole_par_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom" />
+        android:inputType="number"
+        android:hint="Nombre de PAR" />
+
+    <EditText
+        android:id="@+id/dialog_add_hole_order_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="La position dans la game" />
+
 
 </LinearLayout>
-
-
