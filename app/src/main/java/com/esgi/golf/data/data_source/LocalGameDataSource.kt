@@ -67,7 +67,7 @@ class LocalGameDataSource @Inject constructor(): GameDataSource {
     )
 
     private val games = mutableListOf(
-        GameDto(1, "Game 1", players, holes, rounds),
+        GameDto(1, "Game 1", players, holes, rounds, players[0], java.time.LocalDate.now()),
     )
 
     override fun add(game: GameDto): Int {
