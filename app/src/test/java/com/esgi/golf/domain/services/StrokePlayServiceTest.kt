@@ -1,6 +1,6 @@
 package com.esgi.golf.domain.services
 
-import com.esgi.golf.data.repositories.GameRepository
+import com.esgi.golf.domain.repositories.GameRepository
 import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player

@@ -1,6 +1,6 @@
-package com.esgi.golf.domain.models
+package com.esgi.golf.data.dto
 
-data class Hole(
+data class HoleDto(
     val id: Int,
     val order: Int,
     val name: String,

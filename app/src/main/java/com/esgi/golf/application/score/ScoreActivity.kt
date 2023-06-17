@@ -5,47 +5,65 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.application.components.player_item.PlayerItemAdapter
+import com.esgi.golf.application.home.HomeViewModel
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
 import com.esgi.golf.domain.models.Round
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class ScoreActivity : AppCompatActivity() {
-    private val items = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
-    private val holes = listOf(
-        Hole(1, 1, "Trou 1", 2),
-        Hole(2, 2, "Trou 2", 2),
-    )
-    private val rounds = listOf(
-        Round(Player(1, "John", "Doe"), holes[1], 4, 1),
-        Round(Player(1, "John", "Doe"), holes[2], 3, 1),
-        Round(Player(2, "David", "Lynch"), holes[1], 3, 2),
-        Round(Player(2, "David", "Lynch"), holes[2], 9, 2),
 
-    )
+    private val viewModel: ScoreViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
         supportActionBar?.hide()
 
-        // Spinner
-        val spinner: Spinner = findViewById(R.id.hole_spinner)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+        viewModel.gameState.observe(this) {
+            when (it.status) {
+                ScoreStateStatus.Loading -> {
+                    // TODO
+                }
 
-        // TextView
-        val tvPlayer: TextView = findViewById(R.id.tv_player)
-        tvPlayer.text = getString(R.string.player_text, "12")
+                ScoreStateStatus.Success -> {
+                    // Spinner
+                    val spinner: Spinner = findViewById(R.id.hole_spinner)
+                    val adapter =
+                        ArrayAdapter(this, android.R.layout.simple_spinner_item, it.game!!.holes)
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinner.adapter = adapter
 
-        // RecyclerView
-        val recyclerView: RecyclerView = findViewById(R.id.rv_players)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = PlayerItemAdapter(rounds.toMutableList(), ::addShot, ::removeShot, this)
+                    // TextView
+                    val tvPlayer: TextView = findViewById(R.id.tv_player)
+                    tvPlayer.text = getString(R.string.player_text, it.game.players.size.toString())
+
+                    // RecyclerView
+                    val recyclerView: RecyclerView = findViewById(R.id.rv_players)
+                    recyclerView.layoutManager = LinearLayoutManager(this)
+                    recyclerView.adapter =
+                        PlayerItemAdapter(it.game.rounds.filter { e -> e.hole.id == 1 }.toMutableList(), ::addShot, ::removeShot, this)
+                }
+
+                ScoreStateStatus.Error -> {
+                    // TODO
+                }
+
+                else -> {
+
+                }
+            }
+        }
+
+
     }
 
     fun addShot(round: Round): Unit {

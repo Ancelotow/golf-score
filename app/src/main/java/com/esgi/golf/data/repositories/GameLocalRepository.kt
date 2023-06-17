@@ -1,22 +1,26 @@
 package com.esgi.golf.data.repositories
 
+import com.esgi.golf.data.data_source.GameDataSource
+import com.esgi.golf.data.mappers.GameMapper
 import com.esgi.golf.domain.models.Game
+import com.esgi.golf.domain.repositories.GameRepository
+import javax.inject.Inject
 
-class GameLocalRepository : GameRepository {
-
-    private val games = mutableListOf<Game>()
+class GameLocalRepository @Inject constructor(
+    private val dataSource: GameDataSource,
+    private val gameMapper: GameMapper
+) : GameRepository {
 
     override fun add(game: Game): Int {
-        games.add(game);
-        return game.id
+        return dataSource.add(gameMapper.map(game))
     }
 
     override fun get(id: Int): Game? {
-        return games.find { e -> e.id == id }
+        return dataSource.get(id)?.let { gameMapper.map(it) }
     }
 
     override fun getAll(): List<Game> {
-        return games.toList()
+        return dataSource.getAll().map { gameMapper.map(it) }
     }
 
 }

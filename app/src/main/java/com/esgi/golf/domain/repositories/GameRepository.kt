@@ -1,4 +1,4 @@
-package com.esgi.golf.data.repositories
+package com.esgi.golf.domain.repositories
 
 import com.esgi.golf.domain.models.Game
 

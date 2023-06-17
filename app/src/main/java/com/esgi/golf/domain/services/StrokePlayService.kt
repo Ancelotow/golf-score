@@ -1,15 +1,17 @@
 package com.esgi.golf.domain.services
 
-import com.esgi.golf.data.repositories.GameRepository
+import com.esgi.golf.domain.repositories.GameRepository
 import com.esgi.golf.domain.exceptions.GameException
 import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
+import javax.inject.Inject
 
-class StrokePlayService(
-    private val gameId: Int,
+class StrokePlayService @Inject constructor(
     private val repository: GameRepository
 ) : ScoreCalculatorService {
+
+    private val gameId: Int = 1
 
     override fun addShot(hole: Hole, player: Player): Int {
         val game = getGame()
@@ -31,8 +33,16 @@ class StrokePlayService(
         return scores.maxBy{ it.value }.key
     }
 
-    private fun getGame(): Game {
+    override fun getGame(): Game {
         return repository.get(gameId) ?: throw GameException("this game does not exist")
+    }
+
+    override fun removeShot(hole: Hole, player: Player): Int {
+        return 0
+    }
+
+    override fun getTypeGame(): String {
+        return "Stroke Play"
     }
 
 }
