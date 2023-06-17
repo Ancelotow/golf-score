@@ -14,6 +14,7 @@ import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
 import com.esgi.golf.domain.models.Round
+import java.time.LocalDate
 
 class GameListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +58,8 @@ class GameListHolder(v: View) : RecyclerView.ViewHolder(v) {
     private var gameWinner = v.findViewById<TextView>(R.id.item_game_list_game_winner_text_view)
     fun setGame(game: Game){
         gameName.text = game.name
-        gameDate.text = game.date
-        gameWinner.text = game.winner.name + " " + game.winner.firstname
+        gameDate.text = game.date.toString()
+        gameWinner.text = "${game.winner.name} ${game.winner.firstname}"
     }
 }
 
@@ -116,7 +117,7 @@ fun generateFalseGames(): List<Game> {
             holes,
             rounds,
             Player(1, "John", "Doe"),
-            "2023-06-15"
+            LocalDate.now()
         )
     )
 
@@ -128,7 +129,7 @@ fun generateFalseGames(): List<Game> {
             holes,
             rounds,
             Player(2, "Emily", "Doe"),
-            "2023-06-16"
+            LocalDate.now()
         )
     )
 
@@ -140,7 +141,7 @@ fun generateFalseGames(): List<Game> {
             holes,
             rounds,
             Player(3, "David", "Doe"),
-            "2023-06-17"
+            LocalDate.now()
         )
     )
 

@@ -1,5 +1,7 @@
 package com.esgi.golf.domain.models
 
+import java.time.LocalDate
+
 data class Game(
     val id: Int,
     val name: String,
@@ -7,5 +9,5 @@ data class Game(
     val holes: List<Hole>,
     val rounds: List<Round>,
     val winner: Player,
-    val date: String
+    val date: LocalDate
 )
