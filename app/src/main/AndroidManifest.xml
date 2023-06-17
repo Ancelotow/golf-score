@@ -14,10 +14,10 @@
         android:theme="@style/Theme.Golf"
         tools:targetApi="31">
         <activity
-            android:name=".application.score.ScoreActivity"
+            android:name=".application.home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".application.home.HomeActivity"
+            android:name=".application.score.ScoreActivity"
             android:theme="@style/Theme.AppCompat"
             android:exported="true" >
             <intent-filter>
