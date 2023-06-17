@@ -59,7 +59,7 @@ class GameListHolder(v: View) : RecyclerView.ViewHolder(v) {
     fun setGame(game: Game){
         gameName.text = game.name
         gameDate.text = game.date.toString()
-        gameWinner.text = "${game.winner.name} ${game.winner.firstname}"
+        gameWinner.text = "${game.winner?.name ?: ""} ${game.winner?.firstname ?: ""}"
     }
 }
 
