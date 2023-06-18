@@ -5,6 +5,16 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
+
+    <ImageButton
+        android:id="@+id/finishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/home_button"
+        android:padding="8dp"
+        android:src="@drawable/ic_home" />
+
+
     <TextView
         android:id="@+id/winnerTeamTextView"
         android:layout_width="wrap_content"
@@ -25,11 +35,11 @@
 
     <TextView
         android:id="@+id/eventTextView"
-        android:text="@string/eventTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/eventTextView"
         android:textSize="22sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -37,8 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@android:color/darker_gray"
-        android:showDividers="middle"
         android:dividerHeight="1dp"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:showDividers="middle" />
 
 </LinearLayout>
