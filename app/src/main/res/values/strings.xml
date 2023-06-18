@@ -27,6 +27,10 @@
 
     <!-- GameReportActivity -->
     <string name="game_report_title">Game Report</string>
+    <string name="eventTextView">Rounds</string>
+    <string name="round_order">Round %d</string>
+    <string name="number_of_shots">Number of Shots: %d</string>
+    <string name="hole">%s — order(%d)</string>
 
     <!-- DialogsBoxAddPlayer -->
     <string name="dialog_add_player_title">Add Player</string>
