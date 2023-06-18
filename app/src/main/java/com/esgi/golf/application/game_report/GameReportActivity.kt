@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,8 +36,18 @@ class GameReportActivity : AppCompatActivity() {
         viewModel.getGame(gameId)
         viewModel.gameState.observe(this) {
             when (it.status) {
-                GameReportStatus.Loading -> print("TODO Loading")
-                GameReportStatus.Error -> print("TODO Error")
+                GameReportStatus.Loading -> Toast.makeText(
+                    this,
+                    "Chargement de la partie...",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                GameReportStatus.Error -> Toast.makeText(
+                    this,
+                    "Une erreur est survenue lors de la récupération de la partie.",
+                    Toast.LENGTH_LONG
+                ).show()
+
                 GameReportStatus.Success -> {
                     winnerTeamTextView = findViewById(R.id.winnerTeamTextView)
                     strokesTextView = findViewById(R.id.strokesTextView)
