@@ -56,7 +56,7 @@ class GameListActivity : AppCompatActivity() {
                     }
                     gameList = it.games?.toMutableList() ?: mutableListOf()
                     Log.d("GameListActivity", it.games.toString())
-                    val adapter = GameListAdapter(gameList)
+                    val adapter = GameListAdapter(gameList, {position -> navigateTo(activity = this ,gameId = gameList[position].id) }
                     recyclerViewGameList.adapter = adapter
                     Toast.makeText(this, "Parties recuperées", Toast.LENGTH_SHORT).show()
                 }

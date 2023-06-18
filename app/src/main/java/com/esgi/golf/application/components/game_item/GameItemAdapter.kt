@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.domain.models.Game
 
-class GameListAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameListHolder>() {
+class GameListAdapter(private val games: List<Game>, val onItemClick: (position: Int) -> Unit) : RecyclerView.Adapter<GameListHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameListHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_game_list, parent, false)
-        return GameListHolder(view)
+        return GameListHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_game_list, parent, false),
+            onItemClick
+        )
     }
 
     override fun onBindViewHolder(holder: GameListHolder, position: Int) {
