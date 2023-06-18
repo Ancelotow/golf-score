@@ -27,6 +27,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ScoreActivity : AppCompatActivity() {
 
+    companion object {
+
+        fun navigateTo(activity: AppCompatActivity, gameId: Int) {
+            val intent = Intent(activity, ScoreActivity::class.java)
+            intent.putExtra("gameId", gameId)
+            activity.startActivity(intent)
+        }
+
+    }
+
     private val viewModel: ScoreViewModel by viewModels()
     private var holeSelected: Hole? = null
     private lateinit var spinner: Spinner

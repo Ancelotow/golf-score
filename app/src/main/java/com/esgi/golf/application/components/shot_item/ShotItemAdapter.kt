@@ -1,6 +1,5 @@
 package com.esgi.golf.application.components.shot_item
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
