@@ -13,6 +13,7 @@
 
     <!-- GameListActivity -->
     <string name="game_list_title">Game List</string>
+    <string name="game_list_empty">No games found</string>
 
     <!-- GameSetupActivity -->
     <string name="game_setup_title">Game Setup</string>

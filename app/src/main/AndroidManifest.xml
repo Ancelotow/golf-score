@@ -20,10 +20,6 @@
         </activity>
         <activity
             android:name=".application.game.GameListActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat" />
-        <activity
-            android:name=".application.setup.GameSetupActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat">
             <intent-filter>
@@ -31,6 +27,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".application.setup.GameSetupActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat">
+
         </activity>
         <activity
             android:name=".application.home.HomeActivity"

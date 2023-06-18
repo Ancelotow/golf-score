@@ -1,5 +1,7 @@
 package com.esgi.golf.config
 
+import com.esgi.golf.domain.services.GameListService
+import com.esgi.golf.domain.services.GameListServiceInterface
 import com.esgi.golf.domain.services.GameSetupService
 import com.esgi.golf.domain.services.GameSetupServiceInterface
 import com.esgi.golf.domain.services.ScoreCalculatorService
@@ -22,4 +24,7 @@ abstract class ServiceModule {
     @Singleton
     abstract fun provideGameSetupService(service: GameSetupService): GameSetupServiceInterface
 
+    @Binds
+    @Singleton
+    abstract fun provideGameListService(service: GameListService): GameListServiceInterface
 }
