@@ -78,6 +78,8 @@ class GameSetupActivity : AppCompatActivity() {
 
                 Log.d("TAG", "Value 1: $value1")
                 Log.d("TAG", "Value 2: $value2")
+                val emptyPlayerTextView = findViewById<TextView>(R.id.game_setup_empty_player_list_text_view)
+                emptyPlayerTextView.visibility = View.GONE
                 players.add(Player(id = players.size + 1, firstname = value1, name = value2, 0))
                 playerAdapter.notifyDataSetChanged()
                 builder.addPlayer(Player(id = players.size + 1, firstname = value1, name = value2, scoreTotal = 0))
@@ -108,6 +110,8 @@ class GameSetupActivity : AppCompatActivity() {
                 val value2 = par.text
                 val value3 = order.text
 
+                val emptyHoleTextView = findViewById<TextView>(R.id.game_setup_holes_empty_list_text_view)
+                emptyHoleTextView.visibility = View.GONE
                 holes.add(Hole(id = holes.size + 1, name = value1, par = value2.toString().toInt(), order = value3.toString().toInt()))
                 holeAdapter.notifyDataSetChanged()
                 builder.addHole(Hole(id = holes.size + 1, name = value1, par = value2.toString().toInt(), order = value3.toString().toInt()))

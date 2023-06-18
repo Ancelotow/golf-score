@@ -22,7 +22,8 @@
     <string name="game_setup_start_game_button">Start</string>
     <string name="game_setup_add_holes_button">+ Add Holes</string>
     <string name="game_setup_game_name">Game Name</string>
-
+    <string name="game_setup_empty_player_list">No Players</string>
+    <string name="game_setup_empty_hole_list">No Holes</string>
 
     <!-- LoginActivity -->
     <string name="login_title">Login</string>
