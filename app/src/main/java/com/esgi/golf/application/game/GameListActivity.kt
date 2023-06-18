@@ -67,10 +67,10 @@ fun generateFalseGames(): List<Game> {
     val games = mutableListOf<Game>()
 
     val players = listOf(
-        Player(1, "John", "Doe"),
-        Player(2, "Emily", "Doe"),
-        Player(3, "David", "Doe"),
-        Player(4, "Sophia", "Doe"),
+        Player(1, "John", "Doe", 0),
+        Player(2, "Emily", "Doe", 0),
+        Player(3, "David", "Doe", 0),
+        Player(4, "Sophia", "Doe", 0),
     )
 
     val holes = listOf(
@@ -95,18 +95,18 @@ fun generateFalseGames(): List<Game> {
     )
 
     val rounds = listOf(
-        Round(players[0], holes[0], 4, 1),
-        Round(players[0], holes[1], 3, 2),
-        Round(players[0], holes[2], 5, 3),
-        Round(players[1], holes[0], 3, 4),
-        Round(players[1], holes[1], 4, 5),
-        Round(players[1], holes[2], 6, 6),
-        Round(players[2], holes[0], 5, 7),
-        Round(players[2], holes[1], 2, 8),
-        Round(players[2], holes[2], 4, 9),
-        Round(players[3], holes[0], 2, 10),
-        Round(players[3], holes[1], 3, 11),
-        Round(players[3], holes[2], 5, 12),
+        Round(players[0], holes[0], 4, 1, 0),
+        Round(players[0], holes[1], 3, 2, 0),
+        Round(players[0], holes[2], 5, 3, 0),
+        Round(players[1], holes[0], 3, 4, 0),
+        Round(players[1], holes[1], 4, 5, 0),
+        Round(players[1], holes[2], 6, 6, 0),
+        Round(players[2], holes[0], 5, 7, 0),
+        Round(players[2], holes[1], 2, 8, 0),
+        Round(players[2], holes[2], 4, 9, 0),
+        Round(players[3], holes[0], 2, 10, 0),
+        Round(players[3], holes[1], 3, 11, 0),
+        Round(players[3], holes[2], 5, 12, 0),
     )
 
     games.add(
@@ -116,7 +116,7 @@ fun generateFalseGames(): List<Game> {
             players,
             holes,
             rounds,
-            Player(1, "John", "Doe"),
+            Player(1, "John", "Doe", 0),
             LocalDate.now()
         )
     )
@@ -128,7 +128,7 @@ fun generateFalseGames(): List<Game> {
             players,
             holes,
             rounds,
-            Player(2, "Emily", "Doe"),
+            Player(2, "Emily", "Doe", 0),
             LocalDate.now()
         )
     )
@@ -140,7 +140,7 @@ fun generateFalseGames(): List<Game> {
             players,
             holes,
             rounds,
-            Player(3, "David", "Doe"),
+            Player(3, "David", "Doe", 0),
             LocalDate.now()
         )
     )

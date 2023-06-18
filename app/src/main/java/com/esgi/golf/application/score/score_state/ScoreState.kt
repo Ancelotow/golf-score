@@ -1,11 +1,11 @@
-package com.esgi.golf.application.score
+package com.esgi.golf.application.score.score_state
 
-import com.esgi.golf.domain.models.Game
+import com.esgi.golf.domain.models.Round
 
 data class ScoreState(
     val status: ScoreStateStatus = ScoreStateStatus.Loading,
     val error: Throwable? = null,
-    val game: Game? = null
+    val rounds: List<Round> = mutableListOf(),
 ) {
     companion object {
         fun initial() = ScoreState(status = ScoreStateStatus.Initial)
@@ -14,6 +14,6 @@ data class ScoreState(
 
         fun error(error: Throwable) = ScoreState(status = ScoreStateStatus.Error, error = error)
 
-        fun success(game: Game) = ScoreState(status = ScoreStateStatus.Success, game = game)
+        fun success(rounds: List<Round>) = ScoreState(status = ScoreStateStatus.Success, rounds = rounds)
     }
 }

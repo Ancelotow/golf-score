@@ -1,4 +1,4 @@
-package com.esgi.golf.application.score
+package com.esgi.golf.application.score.score_state
 
 enum class ScoreStateStatus {
     Initial,

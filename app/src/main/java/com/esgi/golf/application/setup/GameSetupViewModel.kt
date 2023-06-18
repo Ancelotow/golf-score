@@ -4,9 +4,7 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.esgi.golf.application.score.ScoreState
 import com.esgi.golf.domain.models.Game
-import com.esgi.golf.domain.services.GameSetupService
 import com.esgi.golf.domain.services.GameSetupServiceInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

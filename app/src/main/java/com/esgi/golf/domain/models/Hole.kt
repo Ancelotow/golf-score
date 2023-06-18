@@ -7,6 +7,6 @@ data class Hole(
     val par: Int,
 ) {
     override fun toString(): String {
-        return name
+        return "$name (Par: $par)"
     }
 }

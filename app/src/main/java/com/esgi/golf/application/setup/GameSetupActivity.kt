@@ -1,5 +1,6 @@
 package com.esgi.golf.application.setup
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.application.components.hole_setup_item.HoleSetupAdapter
 import com.esgi.golf.application.components.player_setup_item.PlayerSetupAdapter
+import com.esgi.golf.application.score.ScoreActivity
 import com.esgi.golf.domain.builder.GameBuilder
 import com.esgi.golf.domain.builder.GameBuilderDefault
 import com.esgi.golf.domain.models.Hole
@@ -76,9 +78,9 @@ class GameSetupActivity : AppCompatActivity() {
 
                 Log.d("TAG", "Value 1: $value1")
                 Log.d("TAG", "Value 2: $value2")
-                players.add(Player(id = players.size + 1, firstname = value1, name = value2))
+                players.add(Player(id = players.size + 1, firstname = value1, name = value2, 0))
                 playerAdapter.notifyDataSetChanged()
-                builder.addPlayer(Player(id = players.size + 1, firstname = value1, name = value2))
+                builder.addPlayer(Player(id = players.size + 1, firstname = value1, name = value2, scoreTotal = 0))
                 dialog.dismiss()
             }
 
@@ -147,6 +149,9 @@ class GameSetupActivity : AppCompatActivity() {
                     loadingView.visibility = View.GONE
                     startGameButton.visibility = View.VISIBLE
                     Toast.makeText(this, "Partie créée ${it.gameID}", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, ScoreActivity::class.java)
+                    intent.putExtra("gameId", it.gameID)
+                    startActivity(intent)
                 }
                 GameSetupStatus.Error -> {
                     Log.d("TAG", "Error creating game")
