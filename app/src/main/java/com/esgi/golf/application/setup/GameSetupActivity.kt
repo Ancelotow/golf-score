@@ -14,6 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
+import com.esgi.golf.application.components.hole_setup_item.HoleSetupAdapter
+import com.esgi.golf.application.components.player_setup_item.PlayerSetupAdapter
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
 
@@ -89,8 +91,11 @@ class GameSetupActivity : AppCompatActivity() {
                 val value2 = par.text
                 val value3 = order.text
 
+
+
                 holes.add(Hole(id = holes.size + 1, name = value1, par = value2.toString().toInt(), order = value3.toString().toInt()))
                 holeAdapter.notifyDataSetChanged()
+
                 dialog.dismiss()
             }
 
@@ -104,54 +109,4 @@ class GameSetupActivity : AppCompatActivity() {
     }
 }
 
-class HoleSetupAdapter(private val holes: List<Hole>) : RecyclerView.Adapter<HoleSetupHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoleSetupHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_hole_game_setup, parent, false)
-        return HoleSetupHolder(inflatedView)
-    }
 
-    override fun onBindViewHolder(holder: HoleSetupHolder, position: Int) {
-        val hole = holes[position]
-        holder.setHole(hole)
-    }
-
-    override fun getItemCount(): Int {
-        return holes.size
-    }
-}
-class HoleSetupHolder(v: View) : RecyclerView.ViewHolder(v) {
-    private var holeId = v.findViewById<TextView>(R.id.item_hole_game_setup_hole_order_text_view)
-    private var holePar = v.findViewById<TextView>(R.id.item_hole_game_setup_hole_par_text_view)
-    private var holeName = v.findViewById<TextView>(R.id.item_hole_game_setup_hole_name_text_view)
-    fun setHole(hole: Hole){
-        holeId.text = hole.id.toString()
-        holePar.text = "Par : " + hole.par.toString()
-        holeName.text = hole.name
-    }
-}
-
-class PlayerSetupAdapter(private val players: List<Player>) : RecyclerView.Adapter<PlayerSetupHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerSetupHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_player_game_setup, parent, false)
-        return PlayerSetupHolder(inflatedView)
-    }
-
-    override fun onBindViewHolder(holder: PlayerSetupHolder, position: Int) {
-        val player = players[position]
-        holder.setPlayer(player)
-    }
-
-    override fun getItemCount(): Int {
-        return players.size
-    }
-}
-class PlayerSetupHolder(v: View) : RecyclerView.ViewHolder(v) {
-    private var playerId = v.findViewById<TextView>(R.id.item_player_game_setup_player_id_text_view)
-    private var playerFirstname = v.findViewById<TextView>(R.id.item_player_game_setup_player_firstname_text_view)
-    private var playerLastname = v.findViewById<TextView>(R.id.item_player_game_setup_player_lastname_text_view)
-    fun setPlayer(player: Player){
-        playerId.text = player.id.toString()
-        playerFirstname.text = player.firstname
-        playerLastname.text = player.name
-    }
-}
