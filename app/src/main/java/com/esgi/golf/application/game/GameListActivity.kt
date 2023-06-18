@@ -39,8 +39,7 @@ class GameListActivity : AppCompatActivity() {
         recyclerViewGameList.layoutManager = LinearLayoutManager(this)
 
         var gameList: MutableList<Game>  = mutableListOf()
-        val adapter = GameListAdapter(gameList)
-        recyclerViewGameList.adapter = adapter
+
         viewModel.getGames()
 
         viewModel.gameListState.observe(this) {
@@ -57,7 +56,8 @@ class GameListActivity : AppCompatActivity() {
                     }
                     gameList = it.games?.toMutableList() ?: mutableListOf()
                     Log.d("GameListActivity", it.games.toString())
-                    adapter.notifyDataSetChanged()
+                    val adapter = GameListAdapter(gameList)
+                    recyclerViewGameList.adapter = adapter
                     Toast.makeText(this, "Parties recuperées", Toast.LENGTH_SHORT).show()
                 }
 
