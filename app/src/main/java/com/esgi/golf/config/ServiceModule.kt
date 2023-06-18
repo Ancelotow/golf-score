@@ -1,5 +1,7 @@
 package com.esgi.golf.config
 
+import com.esgi.golf.domain.services.GameSetupService
+import com.esgi.golf.domain.services.GameSetupServiceInterface
 import com.esgi.golf.domain.services.ScoreCalculatorService
 import com.esgi.golf.domain.services.StrokePlayService
 import dagger.Binds
@@ -15,5 +17,9 @@ abstract class ServiceModule {
     @Binds
     @Singleton
     abstract fun provideCalculatorService(service: StrokePlayService): ScoreCalculatorService
+
+    @Binds
+    @Singleton
+    abstract fun provideGameSetupService(service: GameSetupService): GameSetupServiceInterface
 
 }

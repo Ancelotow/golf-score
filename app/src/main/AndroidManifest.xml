@@ -17,11 +17,6 @@
             android:name=".application.score.ScoreActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".application.game.GameListActivity"
@@ -29,8 +24,14 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".application.setup.GameSetupActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".application.home.HomeActivity"
             android:exported="false"

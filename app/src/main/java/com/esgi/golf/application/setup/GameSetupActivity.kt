@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +18,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.application.components.hole_setup_item.HoleSetupAdapter
 import com.esgi.golf.application.components.player_setup_item.PlayerSetupAdapter
+import com.esgi.golf.domain.builder.GameBuilder
+import com.esgi.golf.domain.builder.GameBuilderDefault
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 
+@AndroidEntryPoint
 class GameSetupActivity : AppCompatActivity() {
+
+    private val builder: GameBuilder = GameBuilderDefault()
+    private val viewModel: GameSetupViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_setup)
@@ -64,6 +78,7 @@ class GameSetupActivity : AppCompatActivity() {
                 Log.d("TAG", "Value 2: $value2")
                 players.add(Player(id = players.size + 1, firstname = value1, name = value2))
                 playerAdapter.notifyDataSetChanged()
+                builder.addPlayer(Player(id = players.size + 1, firstname = value1, name = value2))
                 dialog.dismiss()
             }
 
@@ -91,11 +106,9 @@ class GameSetupActivity : AppCompatActivity() {
                 val value2 = par.text
                 val value3 = order.text
 
-
-
                 holes.add(Hole(id = holes.size + 1, name = value1, par = value2.toString().toInt(), order = value3.toString().toInt()))
                 holeAdapter.notifyDataSetChanged()
-
+                builder.addHole(Hole(id = holes.size + 1, name = value1, par = value2.toString().toInt(), order = value3.toString().toInt()))
                 dialog.dismiss()
             }
 
@@ -106,6 +119,47 @@ class GameSetupActivity : AppCompatActivity() {
             val dialog = dialogBuilder.create()
             dialog.show()
         }
+
+        val startGameButton = findViewById<Button>(R.id.game_setup_start_game_button)
+
+        startGameButton.setOnClickListener{
+            val gameNameEditText = findViewById<EditText>(R.id.game_setup_game_name_edit_text)
+            val gameName = gameNameEditText.text.toString()
+            if(gameName != ""){
+                builder.buildName(gameName)
+                builder.buildDate(LocalDate.now())
+                val game = builder.build()
+                viewModel.addGame(game)
+            }
+        }
+        val loadingView = findViewById<View>(R.id.game_setup_start_loading_progress_bar)
+
+        viewModel.gameSetupState.observe(this) {
+            when(it.status){
+                GameSetupStatus.Loading -> {
+                    Log.d("TAG", "Loading")
+                    loadingView.visibility = View.VISIBLE
+                    startGameButton.visibility = View.GONE
+                    Toast.makeText(this, "Création de la partie", Toast.LENGTH_LONG).show()
+                }
+                GameSetupStatus.Success -> {
+                    Log.d("TAG", "Game created ${it.gameID}")
+                    loadingView.visibility = View.GONE
+                    startGameButton.visibility = View.VISIBLE
+                    Toast.makeText(this, "Partie créée ${it.gameID}", Toast.LENGTH_LONG).show()
+                }
+                GameSetupStatus.Error -> {
+                    Log.d("TAG", "Error creating game")
+                    loadingView.visibility = View.GONE
+                    startGameButton.visibility = View.VISIBLE
+                    Toast.makeText(this, "Erreur lors de la création de la partie", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+
+                }
+            }
+        }
+
     }
 }
 
