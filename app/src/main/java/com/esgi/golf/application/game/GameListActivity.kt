@@ -2,6 +2,7 @@ package com.esgi.golf.application.game
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class GameListActivity : AppCompatActivity() {
         var gameList: MutableList<Game>  = mutableListOf()
         val adapter = GameListAdapter(gameList)
         recyclerViewGameList.adapter = adapter
+        viewModel.getGames()
 
         viewModel.gameListState.observe(this) {
             when(it.status){
@@ -54,6 +56,7 @@ class GameListActivity : AppCompatActivity() {
                         recyclerViewGameList.visibility = View.GONE
                     }
                     gameList = it.games?.toMutableList() ?: mutableListOf()
+                    Log.d("GameListActivity", it.games.toString())
                     adapter.notifyDataSetChanged()
                     Toast.makeText(this, "Parties recuperées", Toast.LENGTH_SHORT).show()
                 }
