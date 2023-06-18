@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.application.components.game_item.GameListAdapter
+import com.esgi.golf.application.game_report.GameReportActivity
 import com.esgi.golf.application.setup.GameSetupStatus
 import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
@@ -56,7 +57,7 @@ class GameListActivity : AppCompatActivity() {
                     }
                     gameList = it.games?.toMutableList() ?: mutableListOf()
                     Log.d("GameListActivity", it.games.toString())
-                    val adapter = GameListAdapter(gameList, {position -> navigateTo(activity = this ,gameId = gameList[position].id) }
+                    val adapter = GameListAdapter(gameList, {position -> GameReportActivity.navigateTo(activity = this ,gameId = gameList[position].id) })
                     recyclerViewGameList.adapter = adapter
                     Toast.makeText(this, "Parties recuperées", Toast.LENGTH_SHORT).show()
                 }
