@@ -11,12 +11,14 @@ class PlayerItemViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     private val name = v.findViewById<TextView>(R.id.tv_name)
     private val score = v.findViewById<TextView>(R.id.tv_score)
+    private val shot = v.findViewById<TextView>(R.id.tv_shot)
     private val btnAdd = v.findViewById<ImageButton>(R.id.btn_add)
     private val btnRemove = v.findViewById<ImageButton>(R.id.btn_remove)
 
     fun setItem(item: Round, addShot: (Round) -> Unit, removeShot: (Round) -> Unit) {
         "${item.player.firstname} ${item.player.name.uppercase()} ".also { name.text = it }
-        score.text = item.nbShot.toString()
+        score.text = itemView.context.getString(R.string.score_text, item.score.toString())
+        shot.text = item.nbShot.toString()
         btnAdd.setOnClickListener { addShot(item) }
         btnRemove.setOnClickListener { removeShot(item) }
     }

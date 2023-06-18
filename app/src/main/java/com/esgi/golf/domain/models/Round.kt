@@ -4,5 +4,6 @@ data class Round(
     val player: Player,
     val hole: Hole,
     var nbShot: Int,
-    val order: Int,
+    var score: Int,
+    var order: Int,
 )

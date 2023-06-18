@@ -15,6 +15,7 @@ class RoundMapper @Inject constructor(
             hole = holeMapper.map(round.hole),
             nbShot = round.nbShot,
             order = round.order,
+            score = round.score,
         )
     }
 
@@ -24,6 +25,7 @@ class RoundMapper @Inject constructor(
             hole = holeMapper.map(round.hole),
             nbShot = round.nbShot,
             order = round.order,
+            score = round.score,
         )
     }
 }

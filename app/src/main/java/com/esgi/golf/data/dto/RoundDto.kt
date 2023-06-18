@@ -5,4 +5,5 @@ data class RoundDto(
     val hole: HoleDto,
     var nbShot: Int,
     val order: Int,
+    var score: Int,
 )

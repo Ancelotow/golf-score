@@ -5,11 +5,11 @@ import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
 
 interface ScoreCalculatorService {
-    fun getGame(): Game
+    fun getGame(id: Int): Game
 
-    fun addShot(hole: Hole, player: Player): Int
+    fun addShot(hole: Hole, player: Player, gameId: Int): Int
 
-    fun removeShot(hole: Hole, player: Player): Int
+    fun removeShot(hole: Hole, player: Player, gameId: Int): Int
 
-    fun getWinner(): Player
+    fun finishGame(game: Game)
 }

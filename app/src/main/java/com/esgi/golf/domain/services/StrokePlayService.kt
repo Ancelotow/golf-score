@@ -1,5 +1,6 @@
 package com.esgi.golf.domain.services
 
+import android.util.Log
 import com.esgi.golf.domain.repositories.GameRepository
 import com.esgi.golf.domain.exceptions.GameException
 import com.esgi.golf.domain.models.Game
@@ -11,43 +12,52 @@ class StrokePlayService @Inject constructor(
     private val repository: GameRepository
 ) : ScoreCalculatorService {
 
-    private val gameId: Int = 1
+    override fun getGame(id: Int): Game {
+        return repository.get(id) ?: throw GameException("this game does not exist")
+    }
 
-    override fun addShot(hole: Hole, player: Player): Int {
-        val game = getGame()
+    override fun addShot(hole: Hole, player: Player, gameId: Int): Int {
+        val game = repository.get(gameId) ?: throw GameException("this game does not exist")
         val round = game.rounds.find { r -> hole.id == r.hole.id && player.id == r.player.id }
             ?: throw GameException("this round does not exist")
         round.nbShot += 1
+
+        round.score = getScore(hole.par, round.nbShot)
         repository.update(game)
         return round.nbShot
     }
 
-    override fun getWinner(): Player {
-        val game = getGame()
-        val scores = HashMap<Player, Int>()
-        for(round in game.rounds) {
-            if(scores[round.player] == null) {
-                scores[round.player] = 0;
-            }
-            scores[round.player] = scores[round.player]!! + round.nbShot
-        }
-
-        return scores.maxBy{ it.value }.key
-    }
-
-    override fun getGame(): Game {
-        return repository.get(gameId) ?: throw GameException("this game does not exist")
-    }
-
-    override fun removeShot(hole: Hole, player: Player): Int {
-        val game = getGame()
+    override fun removeShot(hole: Hole, player: Player, gameId: Int): Int {
+        val game = repository.get(gameId) ?: throw GameException("this game does not exist")
         val round = game.rounds.find { r -> hole.id == r.hole.id && player.id == r.player.id }
             ?: throw GameException("this round does not exist")
-        if(round.nbShot > 0) {
+        if (round.nbShot > 0) {
             round.nbShot -= 1
         }
+
+        round.score = getScore(hole.par, round.nbShot)
         repository.update(game)
         return round.nbShot
+    }
+
+    private fun getScore(par: Int, nbShot: Int): Int {
+        return if (nbShot < par) {
+            -1
+        } else {
+            nbShot - par
+        }
+    }
+
+    override fun finishGame(game: Game) {
+        for (int in 0..game.players.size) {
+            game.players[int].scoreTotal = game.rounds.filter {
+                round -> round.player.id == game.players[int].id
+            }.sumOf {
+                round -> round.score
+            }
+        }
+        game.winner = game.players.minByOrNull { player -> player.scoreTotal }
+        repository.update(game)
     }
 
 }

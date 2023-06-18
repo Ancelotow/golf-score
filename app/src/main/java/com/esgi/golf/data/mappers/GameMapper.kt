@@ -29,7 +29,7 @@ class GameMapper @Inject constructor(
             players = game.players.map { playerMapper.map(it) },
             rounds = game.rounds.map { roundMapper.map(it) },
             holes = game.holes.map { holeMapper.map(it) },
-            winner = if (game.winner == null) null else playerMapper.map(game.winner),
+            winner = if (game.winner == null) null else playerMapper.map(game.winner!!),
             date = game.date,
         )
     }

@@ -1,21 +1,25 @@
 package com.esgi.golf.application.score
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.application.components.player_item.PlayerItemAdapter
-import com.esgi.golf.application.home.HomeViewModel
-import com.esgi.golf.domain.models.Game
+import com.esgi.golf.application.game_report.GameReportActivity
+import com.esgi.golf.application.score.game_state.GameStateStatus
+import com.esgi.golf.application.score.score_state.ScoreStateStatus
 import com.esgi.golf.domain.models.Hole
-import com.esgi.golf.domain.models.Player
 import com.esgi.golf.domain.models.Round
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,74 +29,77 @@ class ScoreActivity : AppCompatActivity() {
 
     private val viewModel: ScoreViewModel by viewModels()
     private var holeSelected: Hole? = null
-    private var game: Game? = null
+    private lateinit var spinner: Spinner
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var tvPlayer: TextView
+    private lateinit var btnFinish: Button
+    private var gameId: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
         supportActionBar?.hide()
 
-        val recyclerView: RecyclerView = findViewById(R.id.rv_players)
+        recyclerView = findViewById(R.id.rv_players)
+        spinner = findViewById(R.id.hole_spinner)
+        tvPlayer = findViewById(R.id.tv_player)
+        btnFinish = findViewById(R.id.btn_finish)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val spinner: Spinner = findViewById(R.id.hole_spinner)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                holeSelected = spinner.selectedItem as Hole
-                recyclerView.adapter = PlayerItemAdapter(
-                    game!!.rounds.filter {
-                            e -> e.hole.id == (holeSelected?.id ?: 1)
-                    }.toMutableList(),
-                    ::addShot,
-                    ::removeShot,
-                    this@ScoreActivity
-                )
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                recyclerView.adapter = PlayerItemAdapter(
-                    game!!.rounds.filter {
-                            e -> e.hole.id == (holeSelected?.id ?: 1)
-                    }.toMutableList(),
-                    ::addShot,
-                    ::removeShot,
-                    this@ScoreActivity
-                )
-            }
+        intent.getIntExtra("gameId", -1).let {
+            Log.d("GameId", it.toString())
+            gameId = it
         }
-        val tvPlayer: TextView = findViewById(R.id.tv_player)
 
+        btnFinish.setOnClickListener {
+            finishGame()
+        }
 
+        initGame()
+        loadScore()
+    }
+
+    private fun initGame() {
+        viewModel.getGame(gameId)
         viewModel.gameState.observe(this) {
             when (it.status) {
-                ScoreStateStatus.Loading -> {
-                    // TODO
+                GameStateStatus.Loading -> {
+                    Toast.makeText(this, "Chargement de la partie...", Toast.LENGTH_SHORT).show()
                 }
 
-                ScoreStateStatus.Success -> {
+                GameStateStatus.Success -> {
+                    Log.d("Game", it.game.toString())
                     // Spinner
                     val adapter =
                         ArrayAdapter(this, android.R.layout.simple_spinner_item, it.game!!.holes)
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            holeSelected = spinner.selectedItem as Hole
+                            viewModel.getScore(spinner.selectedItem as Hole, gameId)
+                        }
+
+                        override fun onNothingSelected(parent: AdapterView<*>) {
+                            holeSelected = spinner.selectedItem as Hole
+                            viewModel.getScore(spinner.selectedItem as Hole, gameId)
+                        }
+                    }
                     spinner.adapter = adapter
 
                     // TextView
                     tvPlayer.text = getString(R.string.player_text, it.game.players.size.toString())
-
-                    // RecyclerView
-                    game = it.game
-                    recyclerView.adapter = PlayerItemAdapter(
-                        it.game.rounds.filter {
-                                e -> e.hole.id == (holeSelected?.id ?: 1)
-                        }.toMutableList(),
-                        ::addShot,
-                        ::removeShot,
-                        this
-                    )
                 }
 
-                ScoreStateStatus.Error -> {
-                    // TODO
+                GameStateStatus.Error -> {
+                    Toast.makeText(
+                        this,
+                        "Une erreur est survenue lors de l'initialisation de la partie",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 else -> {
@@ -100,17 +107,54 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
-    fun addShot(round: Round): Unit {
-        viewModel.addShot(round)
-        viewModel.getGame()
+    private fun loadScore() {
+        viewModel.scoreState.observe(this) {
+            when (it.status) {
+                ScoreStateStatus.Success -> {
+                    recyclerView.adapter = PlayerItemAdapter(
+                        it.rounds.toMutableList(),
+                        ::addShot,
+                        ::removeShot,
+                        this
+                    )
+                }
+
+                ScoreStateStatus.Error -> {
+                    Log.e("ScoreActivity", it.error.toString())
+                    Toast.makeText(
+                        this,
+                        "Une erreur est survenue lors de la récupération des scores",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                else -> {
+
+                }
+            }
+        }
     }
 
-    fun removeShot(round: Round) {
-        viewModel.removeShot(round)
-        viewModel.getGame()
+    private fun addShot(round: Round) {
+        viewModel.addShot(round, gameId)
+        if (holeSelected != null) {
+            viewModel.getScore(holeSelected!!, gameId)
+        }
+    }
+
+    private fun removeShot(round: Round) {
+        viewModel.removeShot(round, gameId)
+        if (holeSelected != null) {
+            viewModel.getScore(holeSelected!!, gameId)
+        }
+    }
+
+    private fun finishGame() {
+        viewModel.finishGame(gameId)
+        val intent = Intent(this, GameReportActivity::class.java)
+        intent.putExtra("gameId", gameId)
+        startActivity(intent)
     }
 }

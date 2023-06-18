@@ -11,6 +11,7 @@ class PlayerMapper @Inject constructor() {
             id = player.id,
             name = player.name,
             firstname = player.firstname,
+            scoreTotal = player.scoreTotal,
         )
     }
 
@@ -19,6 +20,7 @@ class PlayerMapper @Inject constructor() {
             id = player.id,
             name = player.name,
             firstname = player.firstname,
+            scoreTotal = player.scoreTotal,
         )
     }
 

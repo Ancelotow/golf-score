@@ -37,14 +37,14 @@ class GameBuilderDefault @Inject constructor() : GameBuilder {
         val rounds = mutableListOf<Round>()
         players.forEach { player ->
             holes.forEach { hole ->
-                rounds.add(Round(player, hole, 0, players.indexOf(player) + 1))
+                rounds.add(Round(player, hole, 0, -1, players.indexOf(player) + 1))
             }
         }
         val game = Game(
             0,
             name,
-            players,
-            holes,
+            players.toList(),
+            holes.toList(),
             rounds,
             winner,
             date
