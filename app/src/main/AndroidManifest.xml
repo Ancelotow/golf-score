@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Golf"
         tools:targetApi="31">
         <activity
-            android:name=".application.home.HomeActivity"
+            android:name=".application.score.ScoreActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat">
             <intent-filter>
@@ -32,7 +32,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name=".application.score.ScoreActivity"
+            android:name=".application.home.HomeActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat" />
         <activity
