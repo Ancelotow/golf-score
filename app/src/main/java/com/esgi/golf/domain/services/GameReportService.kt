@@ -7,11 +7,8 @@ import javax.inject.Inject
 
 class GameReportService @Inject constructor(private val repository: GameRepository) :
     GameReportServiceInterface {
-
-    private val gameId: Int = 1
-
-    override fun getGame(): Game {
-        return repository.get(gameId) ?: throw GameException("This game does not exist.")
+    override fun getGame(id: Int): Game {
+        return repository.get(id) ?: throw GameException("This game does not exist.")
     }
 
     override fun getTotalNbShots(): Int {

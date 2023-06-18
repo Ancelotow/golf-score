@@ -15,27 +15,15 @@ class GameReportViewModel @Inject constructor(private val service: GameReportSer
     private val _gameState = MutableLiveData<GameReportState>()
     val gameState = _gameState
 
-    init {
-        getGame()
-    }
-
-    private fun getGame() {
+    fun getGame(id: Int) {
         viewModelScope.launch {
             _gameState.value = GameReportState.loading()
             try {
-                val game = service.getGame()
+                val game = service.getGame(id)
                 _gameState.value = GameReportState.success(game)
             } catch (e: Exception) {
                 _gameState.value = GameReportState.error(e)
             }
         }
     }
-
-    /*
-    private val _shots = MutableLiveData<List<String>>().apply {
-        value = listOf("Coup 1", "Coup 2", "Coup jean pierre")
-    }
-
-    val shots: LiveData<List<String>> = _shots
-    */
 }
