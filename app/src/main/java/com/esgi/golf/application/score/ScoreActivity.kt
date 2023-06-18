@@ -105,6 +105,7 @@ class ScoreActivity : AppCompatActivity() {
                 }
 
                 GameStateStatus.Error -> {
+                    Log.e("ScoreActivity", it.error.toString())
                     Toast.makeText(
                         this,
                         "Une erreur est survenue lors de l'initialisation de la partie",

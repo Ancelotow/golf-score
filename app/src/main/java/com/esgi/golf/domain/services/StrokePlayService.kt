@@ -49,9 +49,9 @@ class StrokePlayService @Inject constructor(
     }
 
     override fun finishGame(game: Game) {
-        for (int in 0..game.players.size) {
-            game.players[int].scoreTotal = game.rounds.filter {
-                round -> round.player.id == game.players[int].id
+        for (index in 0 until game.players.size) {
+            game.players[index].scoreTotal = game.rounds.filter {
+                round -> round.player.id == game.players[index].id
             }.sumOf {
                 round -> round.score
             }
