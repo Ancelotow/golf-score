@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
@@ -31,6 +32,7 @@ class GameReportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_report)
+        supportActionBar?.hide()
 
         val gameId = intent.getIntExtra("gameId", -1)
         viewModel.getGame(gameId)
@@ -56,7 +58,8 @@ class GameReportActivity : AppCompatActivity() {
                     // Mise à jour de l'interface
                     winnerTeamTextView.text =
                         "${it.game!!.winner?.firstname ?: "No winner"} ${it.game!!.winner?.name ?: ""}"
-                    strokesTextView.text = "TODO 12" // TODO: it.game!!.strokes.toString()
+                    strokesTextView.text = "Score : ${it.game.winner?.scoreTotal ?: -1}"
+
 
                     // RecyclerView
                     shotsRecyclerView.layoutManager = LinearLayoutManager(this)

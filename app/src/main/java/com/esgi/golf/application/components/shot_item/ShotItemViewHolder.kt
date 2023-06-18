@@ -18,7 +18,7 @@ class ShotItemViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         // "${item.player.firstname} ${item.player.name.uppercase()} ".also { name.text = it }
         // shotsNumber.text = item.nbShot.toString()
 
-        roundOrder.text = context.getString(R.string.round_order, item.order)
+        roundOrder.text = context.getString(R.string.round_order, item.order, item.player.firstname, item.player.name)
         shotsNumber.text = context.getString(R.string.number_of_shots, item.nbShot)
         hole.text = context.getString(R.string.hole, item.hole.name, item.hole.order)
     }
