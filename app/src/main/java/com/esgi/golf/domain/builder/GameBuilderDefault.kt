@@ -7,7 +7,7 @@ import com.esgi.golf.domain.models.Round
 import java.time.LocalDate
 import javax.inject.Inject
 
-class GameBuilderImpl @Inject constructor() : GameBuilder {
+class GameBuilderDefault @Inject constructor() : GameBuilder {
 
     private val players = mutableListOf<Player>()
     private val holes = mutableListOf<Hole>()
