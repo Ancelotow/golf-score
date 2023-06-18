@@ -149,9 +149,7 @@ class GameSetupActivity : AppCompatActivity() {
                     loadingView.visibility = View.GONE
                     startGameButton.visibility = View.VISIBLE
                     Toast.makeText(this, "Partie créée ${it.gameID}", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, ScoreActivity::class.java)
-                    intent.putExtra("gameId", it.gameID)
-                    startActivity(intent)
+                    ScoreActivity.navigateTo(this, it.gameID ?: -1)
                 }
                 GameSetupStatus.Error -> {
                     Log.d("TAG", "Error creating game")
