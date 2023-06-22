@@ -33,6 +33,13 @@ import java.time.LocalDate
 @AndroidEntryPoint
 class GameSetupActivity : AppCompatActivity() {
 
+    companion object {
+        fun navigateTo(activity: AppCompatActivity) {
+            val intent = Intent(activity, GameSetupActivity::class.java)
+            activity.startActivity(intent)
+        }
+    }
+
     private val builder: GameBuilder = GameBuilderDefault()
     private val viewModel: GameSetupViewModel by viewModels()
 

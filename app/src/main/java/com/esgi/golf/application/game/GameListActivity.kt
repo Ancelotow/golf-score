@@ -1,5 +1,6 @@
 package com.esgi.golf.application.game
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esgi.golf.R
 import com.esgi.golf.application.components.game_item.GameListAdapter
 import com.esgi.golf.application.game_report.GameReportActivity
+import com.esgi.golf.application.setup.GameSetupActivity
 import com.esgi.golf.application.setup.GameSetupStatus
 import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
@@ -28,6 +30,13 @@ import java.time.LocalDate
 class GameListActivity : AppCompatActivity() {
 
     private val viewModel: GameListViewModel by viewModels()
+
+    companion object {
+        fun navigateTo(activity: AppCompatActivity) {
+            val intent = Intent(activity, GameListActivity::class.java)
+            activity.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

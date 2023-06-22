@@ -29,12 +29,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun newGame(view: View) {
-        val intent = Intent(this, GameSetupActivity::class.java)
-        startActivity(intent)
+        GameSetupActivity.navigateTo(this)
     }
 
     private fun loadGame(view: View) {
-        val intent = Intent(this, GameListActivity::class.java)
-        startActivity(intent)
+        GameListActivity.navigateTo(this)
     }
 }
