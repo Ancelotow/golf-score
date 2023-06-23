@@ -17,7 +17,7 @@ class PlayerItemViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     fun setItem(item: Round, addShot: (Round) -> Unit, removeShot: (Round) -> Unit) {
         "${item.player.firstname} ${item.player.name.uppercase()} ".also { name.text = it }
-        score.text = itemView.context.getString(R.string.score_text, item.score.toString())
+        score.text = itemView.context.getString(R.string.score_text, item.score.toString(), item.type.label)
         shot.text = item.nbShot.toString()
         btnAdd.setOnClickListener { addShot(item) }
         btnRemove.setOnClickListener { removeShot(item) }

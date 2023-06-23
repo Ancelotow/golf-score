@@ -6,4 +6,5 @@ data class Round(
     var nbShot: Int,
     var score: Int,
     var order: Int,
+    var type: ScoreType
 )

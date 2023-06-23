@@ -8,7 +8,7 @@
 
     <!-- ScoreActivity -->
     <string name="hole_text">Hole</string>
-    <string name="score_text">score : %s</string>
+    <string name="score_text">score : %s (%s)</string>
     <string name="btn_finish_txt">Finish</string>
     <string name="player_text">Players (%s)</string>
 

@@ -2,6 +2,7 @@ package com.esgi.golf.data.mappers
 
 import com.esgi.golf.data.dto.RoundDto
 import com.esgi.golf.domain.models.Round
+import com.esgi.golf.domain.models.ScoreType
 import javax.inject.Inject
 
 class RoundMapper @Inject constructor(
@@ -16,6 +17,7 @@ class RoundMapper @Inject constructor(
             nbShot = round.nbShot,
             order = round.order,
             score = round.score,
+            type = ScoreType.values().getOrNull(round.type) ?: ScoreType.Unknown,
         )
     }
 
@@ -26,6 +28,7 @@ class RoundMapper @Inject constructor(
             nbShot = round.nbShot,
             order = round.order,
             score = round.score,
+            type = round.type.ordinal,
         )
     }
 }

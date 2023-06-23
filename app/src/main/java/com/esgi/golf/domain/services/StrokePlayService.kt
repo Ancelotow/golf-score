@@ -6,6 +6,7 @@ import com.esgi.golf.domain.exceptions.GameException
 import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
+import com.esgi.golf.domain.models.ScoreType
 import javax.inject.Inject
 
 class StrokePlayService @Inject constructor(
@@ -16,28 +17,26 @@ class StrokePlayService @Inject constructor(
         return repository.get(id) ?: throw GameException("this game does not exist")
     }
 
-    override fun addShot(hole: Hole, player: Player, gameId: Int): Int {
+    override fun addShot(hole: Hole, player: Player, gameId: Int) {
         val game = repository.get(gameId) ?: throw GameException("this game does not exist")
         val round = game.rounds.find { r -> hole.id == r.hole.id && player.id == r.player.id }
             ?: throw GameException("this round does not exist")
         round.nbShot += 1
-
         round.score = getScore(hole.par, round.nbShot)
+        round.type = getType(hole.par, round.nbShot)
         repository.update(game)
-        return round.nbShot
     }
 
-    override fun removeShot(hole: Hole, player: Player, gameId: Int): Int {
+    override fun removeShot(hole: Hole, player: Player, gameId: Int) {
         val game = repository.get(gameId) ?: throw GameException("this game does not exist")
         val round = game.rounds.find { r -> hole.id == r.hole.id && player.id == r.player.id }
             ?: throw GameException("this round does not exist")
         if (round.nbShot > 0) {
             round.nbShot -= 1
         }
-
         round.score = getScore(hole.par, round.nbShot)
+        round.type = getType(hole.par, round.nbShot)
         repository.update(game)
-        return round.nbShot
     }
 
     private fun getScore(par: Int, nbShot: Int): Int {
@@ -45,6 +44,28 @@ class StrokePlayService @Inject constructor(
             -1
         } else {
             nbShot - par
+        }
+    }
+
+    private fun getType(par: Int, nbShot: Int): ScoreType {
+        return if (nbShot == par) {
+            ScoreType.Par
+        } else if (nbShot == (par + 1)) {
+            ScoreType.Bogey
+        } else if (nbShot == (par + 2)) {
+            ScoreType.DoubleBogey
+        } else if (nbShot == (par + 3)) {
+            ScoreType.TripleBogey
+        } else if (nbShot > (par + 3)) {
+            ScoreType.BadHole
+        } else if (nbShot == (par - 1)) {
+            ScoreType.Birdie
+        } else if (nbShot == (par - 2)) {
+            ScoreType.Eagle
+        } else if (nbShot == (par - 3)) {
+            ScoreType.Albatros
+        } else {
+            ScoreType.Unknown
         }
     }
 

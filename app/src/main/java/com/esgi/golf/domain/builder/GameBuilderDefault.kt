@@ -4,6 +4,7 @@ import com.esgi.golf.domain.models.Game
 import com.esgi.golf.domain.models.Hole
 import com.esgi.golf.domain.models.Player
 import com.esgi.golf.domain.models.Round
+import com.esgi.golf.domain.models.ScoreType
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -37,7 +38,7 @@ class GameBuilderDefault @Inject constructor() : GameBuilder {
         val rounds = mutableListOf<Round>()
         players.forEach { player ->
             holes.forEach { hole ->
-                rounds.add(Round(player, hole, 0, -1, players.indexOf(player) + 1))
+                rounds.add(Round(player, hole, 0, -1, players.indexOf(player) + 1, ScoreType.Unknown))
             }
         }
         val game = Game(
