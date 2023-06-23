@@ -2,43 +2,61 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginHorizontal="8dp"
 
-        <TextView
-            android:id="@+id/tv_round_text"
-            android:layout_width="wrap_content"
+        android:backgroundTint="@color/colorBackground"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardCornerRadius="10dp"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/round_order"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_round_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/round_order"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_shots_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/number_of_shots"
-        android:textColor="#808080"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tv_shots_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/number_of_shots"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/tv_hole_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/hole"
-        android:textColor="#808080"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tv_hole_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/hole"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
