@@ -12,6 +12,6 @@ enum class ScoreType(val label: String) {
     QuintupleBogey("Quintuple Bogey"),
     BadHole("Bad Hole"),
     Par("Par"),
-    Unknown("Inconnu");
+    Unknown("");
 
 }
